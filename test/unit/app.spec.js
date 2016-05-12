@@ -3,7 +3,7 @@ describe('app', function () {
 
     var app = window.app;
 
-    xdescribe('assignToSwimmingCourse', function () {
+    describe('assignToSwimmingCourse', function () {
         it('should assign adult person to adult group', function () {
             expect(app.assignToSwimmingCourse('Jack', '10/10/1995')).toEqual({
                 name: 'Jack', age: 20, course: 'adults'
@@ -22,8 +22,8 @@ describe('app', function () {
 
         // NoweTesty
         it('should assign person below 12 to kids group', function () {
-            expect(app.assignToSwimmingCourse('Jan', '10/04/2013')).toEqual({
-                name: 'Jan' , age: 3, course: 'kids'
+            expect(app.assignToSwimmingCourse('Jan', '10/04/2007')).toEqual({
+                name: 'Jan' , age: 8, course: 'kids'
             });
         });
         it('should assign person below 12 to kids group', function () {
@@ -32,22 +32,22 @@ describe('app', function () {
             });
         });
         it('should assign person  12 - 17 to teens group', function () {
-            expect(app.assignToSwimmingCourse('Piotr', '10/04/20-02')).toEqual({
-                name: 'Piotr' , age: 6, course: 'teens'});
+            expect(app.assignToSwimmingCourse('Piotr', '10/04/2002')).toEqual({
+                name: 'Piotr' , age: 13, course: 'teens'});
         });
         it('should assign adult person to adult group', function () {
             expect(app.assignToSwimmingCourse('Roman', '10/10/1995')).toEqual({
-                name: 'Jack', age: 20, course: 'adults'
+                name: 'Roman', age: 20, course: 'adults'
             });
         });
         it('should assign person 12 - 17 to teens group', function () {
             expect(app.assignToSwimmingCourse('Wojtek', '08/06/2004')).toEqual({
-                name: 'Zack', age: 11, course: 'teens'
+                name: 'Wojtek', age: 11, course: 'kids'
             });
         });
         it('should assign person over 18 to adult group', function () {
             expect(app.assignToSwimmingCourse('Anna', '01/01/1998')).toEqual({
-                name: 'Anna', age: 18, course: 'adult'
+                name: 'Anna', age: 18, course: 'adults'
             });
         });
 
@@ -56,32 +56,33 @@ describe('app', function () {
     describe('calculateAge', function () {
         it('should return age', function () {
             expect(app.calculateAge('10/10/1995')).toEqual(20);
-            expect(app.calculateAge('14/03/1992')).toEqual(24);
-        });
-        xit('should return age', function () {
-            expect(app.calculateAge('10/13/1993')).toEqual(23);
+            expect(app.calculateAge('03/14/1992')).toEqual(24);
         });
         it('should return age', function () {
-            expect(app.calculateAge('0/0/2005')).toEqual(11);
+            expect(app.calculateAge('10/13/1992')).toEqual(23);
+        });
+        it('should return age', function () {
+            expect(app.calculateAge('6/6/2004')).toEqual(11);
         });
 
     });
 
     describe('calculateArea', function () {
-        expect(answer.calculateArea(2,55,3,'Success', 'Error')).toEqual({area: 49, message: 'Success'});
-        expect(answer.calculateArea(21,2,0,'Success', 'Error')).toEqual({area: 21, message: 'Success'});
+        it('should calculate area', function() {
+            expect(app.calculateArea(2,55,3,'Success', 'Error')).toEqual({area: 49, message: 'Success'});
+            expect(app.calculateArea(21,2,0,'Success', 'Error')).toEqual({area: 21, message: 'Success'});
+        });
+        it('should return false if some of arguments are incorrect', function () {
+            expect(app.calculateArea('fa',2,1,'af','asf')).toEqual(false);
+            expect(app.calculateArea(2,'fad',1,'af','asdf')).toEqual(false);
+            expect(app.calculateArea(2,2,'asd','adf','asdf')).toEqual(false);
+            expect(app.calculateArea(2,2,2,2,'asdf')).toEqual(false);
+            expect(app.calculateArea(2,2,2,'asdf',2)).toEqual(false);
+        });
+        it('should return Big null if area equal 0', function () {
+            expect(app.calculateArea(1,2,2,'Success','Error')).toEqual({area: 0, message:'Big null'});
+        });
     });
-    it('should return false if some of arguments are incorrect', function () {
-        expect(answer.calculateArea("fa",2,1,"af","asf")).toEqual(false);
-        expect(answer.calculateArea(2,"fad",1,"af","asdf")).toEqual(false);
-        expect(answer.calculateArea(2,2,"fasd","adf","asdf")).toEqual('Big null);
-        expect(answer.calculateArea(2,2,2,2,"asdf")).toEqual(false);
-        expect(answer.calculateArea(2,2,2,"asdf",2)).toEqual(false);
-    });
-    it('should return Big null if area equal 0', function () {
-        expect(answer.calculateArea(1,2,3,"Success","Error")).toEqual({area: 0, message:'Big null'});
-    });
-
 });
 
 
